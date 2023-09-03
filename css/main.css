@@ -1,0 +1,33 @@
+#page {
+	display: grid;
+	grid-template-columns: 1fr 4fr;
+	grid-template-rows: 100px auto;
+	/*gap: 4px;*/
+	min-height: 100vh;
+}
+#page > * {
+	border:  2px solid lightgray;
+}
+#page header {
+	grid-column: 1 / -1;
+	background-color: lightgray;
+}
+#page header h2 {
+	margin: 20px 0 0 20px;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+}
+#page aside {
+	grid-column: 1 / 2;
+	grid-row: 2 / 3;
+	padding: 10px;
+	background-color: lightgray;
+}
+.list-group, .list-group-item, .list-group-item-action {
+	background-color: lightgray;
+}
+#page main {
+	grid-column: 2 / 3;
+	padding: 30px;
+	
+}
