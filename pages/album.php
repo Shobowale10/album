@@ -34,73 +34,70 @@
 					$query->execute();
 
 					if($query->rowCount() != 0) { ?>
-					<div class="row">
-						<div class="col">
-							<p>Welcome, <a href="?pg=login">Login</a> here </p>
+						<div class="row">
+							<div class="col">
+								<p>Welcome, <a href="?pg=login">Login</a> here </p>
+							</div>
+							<div class="col">
+							<?php if($page == 1 && $totalrecord < 10) { ?>
+								<p class="lead text-right">Showing Record <?php echo($serialno) ?> - <?php echo($totalrecord) ?> of <?php echo($totalrecord) ?> Record</p>
+							<?php } elseif($page == $totalrecord) { ?>
+								<p class="lead text-right">Showing Record <?php echo($serialno) ?> - <?php echo($totalrecord) ?> of <?php echo($totalrecord) ?> Record</p>
+							<?php } else { ?>
+								<p class="lead text-right">Showing Record <?php echo($serialno) ?> - <?php echo(($recordperpage + $serialno) - 1) ?> of <?php echo($totalrecord) ?> Record</p>
+							<?php } ?>  
+							</div>
 						</div>
-						<div class="col">
-						<?php if($page == 1 && $totalrecord < 10) { ?>
-							<p class="lead text-right">Showing Record <?php echo($serialno) ?> - <?php echo($totalrecord) ?> of <?php echo($totalrecord) ?> Record</p>
-						<?php } elseif($page == $totalrecord) { ?>
-							<p class="lead text-right">Showing Record <?php echo($serialno) ?> - <?php echo($totalrecord) ?> of <?php echo($totalrecord) ?> Record</p>
+
+
+						<table class="table table-bordered table-sm">
+							<thead class="bg-dark text-light text-center text-uppercase">
+								<tr>
+									<th>S/N</th>
+									<th>title</th>
+									<th>Artist</th>
+									<th>Label</th>
+									<th>Released</th>
+									<th>No of Track</th>
+								</tr>
+							</thead>
+
+							<tbody class="text-center">
+								<?php 
+									while($album = $query->fetch(PDO::FETCH_OBJ)): ?>
+										 $a_id = $album->id;?>
+											<tr>
+												<td><?php echo($serialno); ?></td>
+												<td><?php echo($album->title); ?></td>
+												<td><?php echo($album->artist); ?></td>
+												<td><?php echo($album->label); ?></td>
+												<td><?php echo(((int)$album->released)); ?></td>
+												<td>
+													<?php 
+														try {
+															$t_sql = "SELECT * FROM `track` WHERE `album_id` = {$a_id}";
+															$db->prepare($t_sql);
+															$t_qry = $db->query($t_sql);
+															$t_qry->execute();
+															$t_num = $t_qry->rowCount();
+														} catch (PDOException $e) {}
+														echo($t_num);
+													?>
+												</td>
+											</tr>
+										<?php $serialno++;
+									endwhile; 
+								?>
+							</tbody>
+						</table>
+
+						<hr>
+						<p class="text-right font-weight-bolder">Page<?php echo($page)?> of <?php echo($totalpage)?></p>
 						<?php } else { ?>
-							<p class="lead text-right">Showing Record <?php echo($serialno) ?> - <?php echo(($recordperpage + $serialno) - 1) ?> of <?php echo($totalrecord) ?> Record</p>
-						<?php } ?>  
-						</div>
-					</div>
-
-
-					<table class="table table-bordered table-sm">
-						<thead class="bg-dark text-light text-center text-uppercase">
-							<tr>
-								<th>S/N</th>
-								<th>title</th>
-								<th>Artist</th>
-								<th>Label</th>
-								<th>Released</th>
-								<th>No of Track</th>
-							</tr>
-						</thead>
-
-						<tbody class="text-center">
-							
-							<?php 
-							while($album = $query->fetch(PDO::FETCH_OBJ)): ?>
-								<?php $a_id = $album->id; ?>
-									<tr>
-										<td><?php echo($serialno); ?></td>
-										<td><?php echo($album->title); ?></td>
-										<td><?php echo($album->artist); ?></td>
-										<td><?php echo($album->label); ?></td>
-										<td><?php echo(((int)$album->released)); ?></td>
-										<td>
-											<?php 
-													try {
-														$t_sql = "SELECT * FROM `track` WHERE `album_id` = {$a_id}";
-														$db->prepare($t_sql);
-														$t_qry = $db->query($t_sql);
-														$t_qry->execute();
-														$t_num = $t_qry->rowCount();
-													} catch (PDOException $e) {
-														
-													}
-													echo($t_num);
-												?>
-											</td>
-										</tr>
-									<?php
-										$serialno++;
-								endwhile; ?>
-									</tbody>
-									</table>
-								<hr>
-								<p class="text-right font-weight-bolder">Page<?php echo($page)?> of <?php echo($totalpage)?></p>
-								<?php } else { ?>
-											<p>No Information to Showcase this Time</p>
-								<?php 		
-							} 
-						?>
-					</div>
+							<p>No Information to Showcase this Time</p>
+						<?php 
+					} ?>
+				</div>
 			</div>
 		</div>
 
