@@ -101,7 +101,6 @@
 			</div>
 		</div>
 
-		<?php require_once('./layout/footer.php'); ?>
 		<script>
 			var ppg = document.getElementById('ppg');
 			var frm = document.forms.getPpg;
@@ -109,4 +108,6 @@
 			frm.submit();
 			});	
 		</script>
+
+		<?php require_once('./layout/footer.php'); ?>
 
