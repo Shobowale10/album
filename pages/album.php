@@ -1,6 +1,7 @@
-<?php $page_title = 'Album List' ?>
-<?php require_once('./layout/header.php'); ?>
-<?php 
+<?php
+	$page_title = 'Album List';
+	require_once('./layout/header.php'); 
+
     try {
 	    $pg_sql = "SELECT * FROM album";
 	    $db->prepare($pg_sql);
