@@ -105,7 +105,7 @@
 			var ppg = document.getElementById('ppg');
 			var frm = document.forms.getPpg;
 			ppg.addEventListener('change', function() {
-			frm.submit();
+				frm.submit();
 			});	
 		</script>
 
