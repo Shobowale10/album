@@ -1,5 +1,5 @@
 <?php
-	$page_title = 'Album List';
+	$page_title = 'Album List Page';
 	require_once('./layout/header.php'); 
 
     try {
