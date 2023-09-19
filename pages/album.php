@@ -17,7 +17,8 @@
     $recordperpage = isset($_GET['ppg']) ? (int)$_GET['ppg'] : 7;
     $startpage = ($page - 1) * $recordperpage;
     $totalpage = ceil($totalrecord/$recordperpage);
-    $serialno = $startpage + 1;?>
+    $serialno = $startpage + 1;
+	?>
 
 
 	<div class="container mt-5">
@@ -109,5 +110,5 @@
 			});	
 		</script>
 
-		<?php require_once('./layout/footer.php'); ?>
+	<?php require_once('./layout/footer.php'); ?>
 
