@@ -102,13 +102,13 @@
 			</div>
 		</div>
 
-		<script>
-			var ppg = document.getElementById('ppg');
-			var frm = document.forms.getPpg;
-			ppg.addEventListener('change', function() {
-				frm.submit();
-			});	
-		</script>
+	<script>
+		var ppg = document.getElementById('ppg');
+		var frm = document.forms.getPpg;
+		ppg.addEventListener('change', function() {
+			frm.submit();
+		});	
+	</script>
 
-	<?php require_once('./layout/footer.php'); ?>
+<?php require_once('./layout/footer.php'); ?>
 
