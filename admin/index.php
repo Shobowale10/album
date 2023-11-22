@@ -13,8 +13,8 @@
 		<?php require_once('./layout/adm-header.php') ?>
 			<main>
 				<h3>Admin Dashboard</h3>
-			<hr>
-			<p>Welcome to Admin Dashboard</p>
+				<hr>
+				<p>Welcome to Admin Dashboard</p>
 			</main>
 			<!-- Required Sidebar -->
 		<?php require_once('./layout/adm-sidebar.php') ?>
