@@ -4,9 +4,10 @@
 	}
 	$user = getUser($_SESSION['user']['id']);
 
-	require_once('./layout/header.php'); ?>
+	require_once('./layout/header.php'); 
+	?>
 
-<div class="container-fluid mt-2">
+	<div class="container-fluid mt-2">
 	<div id="page"> 
 			
 		<!-- require Header -->
