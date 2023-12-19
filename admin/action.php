@@ -1,47 +1,54 @@
 <?php $page_title = 'Action Page';
+
 	if(!logged_in()) {
  		header('Location: ?pg=login'); }
  		$user = getUser($_SESSION['user']['id']);
- if(isset($_GET['a']) && isset($_GET['id'])) {
- 	$id = $_GET['id'];
- 	$action = $_GET['a'];
- 	if($action === 'del') {
- 		header('Location: ?pg=manage_album');
- 	} elseif($action === 'view') {
- 		try {
- 			$sql = "SELECT * FROM album WHERE `id` = {$id} LIMIT 1";
- 			$db->prepare($sql);
- 			$query = $db->query($sql);
- 			$query->execute();
- 			if($query->rowCount() === 1) {
- 				$album = $query->fetch(PDO::FETCH_OBJ);
- 			} else {
- 				$album = null;
- 			}
- 		} catch (PDOException $e) {
- 			
- 		}
- 		
- 	}
- }
- // update
- if(isset($_POST['update'])) {
-	// Collect the album details
-	$title = addslashes($_POST['title']);
-	$artist = addslashes($_POST['artist']);
-	$label = addslashes($_POST['label']);
-	$dateReleased = addslashes($_POST['dateReleased']);
-	$a_id = addslashes($_POST['album']);
-	try {
-		$u_sql = "UPDATE `album` SET `title` = '{$title}', `artist` = '{$artist}', `label` = '{$label}', `released` = '{$dateReleased}' WHERE `id` = ".$a_id. " LIMIT 1";
-		$u_qry = $db->prepare($u_sql);
-		if($u_qry->execute()) {
+
+	if(isset($_GET['a']) && isset($_GET['id'])) {
+		$id = $_GET['id'];
+		$action = $_GET['a'];
+
+		if ($action === 'del') {
 			header('Location: ?pg=manage_album');
+
+		} elseif($action === 'view') {
+			try {
+				$sql = "SELECT * FROM album WHERE `id` = {$id} LIMIT 1";
+				$db->prepare($sql);
+				$query = $db->query($sql);
+				$query->execute();
+				if($query->rowCount() === 1) {
+					$album = $query->fetch(PDO::FETCH_OBJ);
+				} else {
+					$album = null;
+				}
+			} catch (PDOException $e) {
+				
+			}
+			
 		}
-	} catch (PDOException $e) {
-		
 	}
- }
+
+	// update
+	if(isset($_POST['update'])) {
+		// Collect the album details
+		$title = addslashes($_POST['title']);
+		$artist = addslashes($_POST['artist']);
+		$label = addslashes($_POST['label']);
+		$dateReleased = addslashes($_POST['dateReleased']);
+		$a_id = addslashes($_POST['album']);
+		
+		try {
+			$u_sql = "UPDATE `album` SET `title` = '{$title}', `artist` = '{$artist}', `label` = '{$label}', `released` = '{$dateReleased}' WHERE `id` = ".$a_id. " LIMIT 1";
+			$u_qry = $db->prepare($u_sql);
+			
+			if($u_qry->execute()) {
+				header('Location: ?pg=manage_album');
+			}
+		} catch (PDOException $e) {
+			
+		}
+	}
 ?>
 
 <?php require_once('./layout/header.php'); ?>
